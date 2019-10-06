@@ -5,12 +5,13 @@ from stellarlib.surface import Surface
 
 class DisplayNode(SceneNode):
 
-    def __init__(self, parent, pos, width, height):
+    def __init__(self, parent, pos, width, height, auto_refresh=True):
 
         SceneNode.__init__(self, parent, pos)
         self.w = width
         self.h = height
-        self.clear_color = (0, 0, 0)  # TODO
+        self.clear_color = (0, 0, 0)
+        self.auto_refresh = auto_refresh
 
         self._surface = self.init_surface()
 
@@ -24,8 +25,10 @@ class DisplayNode(SceneNode):
         return self
 
     def update(self):
-        
-        self._surface.clear(self.clear_color)  # TODO optional refresh
+
+        if self.auto_refresh:
+            self.refresh()
+
         self.position.update()
         [component.update() for component in self.components]
         [child.update() for child in self.children]
@@ -40,3 +43,6 @@ class DisplayNode(SceneNode):
     def draw_self(self, target):
         """ Draws the display's surface onto the target surface """
         self._surface.draw(target, self.relative_pos(target))
+
+    def refresh(self):
+        self._surface.clear(self.clear_color)

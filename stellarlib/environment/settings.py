@@ -12,7 +12,6 @@ class Settings(object):
         'FPS': 60,
     }
 
-
     @classmethod
     def modify(cls, **kwargs):
         for k, v in kwargs.items():

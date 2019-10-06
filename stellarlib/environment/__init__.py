@@ -37,7 +37,6 @@ def get_environment(*args, **kwargs):
         raise Exception('Stellarlib is not initialized')
 
     if Initialization.STELLARLIB_ENV is None:
-        Initialization.STELLARLIB_ENV = Environment()
+        Initialization.STELLARLIB_ENV = Environment(*args, **kwargs)
 
     return Initialization.STELLARLIB_ENV
-

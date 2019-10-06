@@ -1,5 +1,5 @@
 from .scene import Scene
-from .scene_transitions import ExitTransition
+from .scene_transition import ExitTransition
 
 
 class BasicScene(Scene):
